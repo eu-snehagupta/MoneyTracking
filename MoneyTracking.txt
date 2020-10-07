@@ -1,1 +1,5 @@
-Expense**Food**1994-10-12**300.09
+Income**salary**2020-10-11**3215.0
+Expense**res**nuhuih**12.0
+Expense**zoro**someday**1234.0
+Expense**food**dfgg**234.0
+Income**salary**erg**23.9

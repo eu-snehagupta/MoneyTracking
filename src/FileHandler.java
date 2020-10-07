@@ -2,19 +2,19 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FileHandler {
-    private String fileName = "MoneyTracking.txt";
+    private final String fileName = "MoneyTracking.txt";
 
     public void writeAsData(ArrayList<MoneyTracking> list) {
         try {
-            FileWriter fileWriter = new FileWriter(fileName);
+            FileWriter fileWriter = new FileWriter(fileName, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            for (MoneyTracking a : list) {
-                bufferedWriter.write(a.toString() + "\n");
+            for (MoneyTracking data : list) {
+                bufferedWriter.write(data.toString() + "\n");
             }
             bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("ERROR: " +e);
         }
     }
 
@@ -28,16 +28,16 @@ public class FileHandler {
             String line = "";
             String[] data;
 
-            while ( (line = bufferedReader.readLine()) != null ) {
+            while ((line = bufferedReader.readLine()) != null) {
                 data = line.split("\\*\\*");
-                MoneyTracking a = new MoneyTracking(data[0],data[1], data[2], Double.parseDouble(data[3]));
-                list.add(a);
-            }bufferedReader.close();
+                MoneyTracking dataValue = new MoneyTracking(data[0], data[1], data[2], Double.parseDouble(data[3]));
+                list.add(dataValue);
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            System.out.println("ERROR: " +e);
         }
-        catch (IOException e) {
-            System.out.println(e);
-        }
-    return list;
+        return list;
     }
 
     public void writeAsObject(ArrayList<MoneyTracking> list) {
@@ -48,8 +48,8 @@ public class FileHandler {
             outputFile.writeObject(list);
             outputFile.close();
             file.close();
-        } catch(IOException e) {
-            System.out.println(e);
+        } catch (IOException e) {
+            System.out.println("ERROR: " +e);
         }
 
     }
@@ -63,10 +63,10 @@ public class FileHandler {
             list = (ArrayList<MoneyTracking>) stream.readObject();
             stream.close();
             inputFile.close();
-        } catch(IOException  e) {
-            System.out.println(e);
+        } catch (IOException e) {
+            System.out.println("ERROR: " +e);
         } catch (ClassNotFoundException e) {
-            System.out.println(e);
+            System.out.println("ERROR: Class Not Found" +e);
         }
         return list;
     }
