@@ -1,8 +1,34 @@
-# MoneyTracking
-- User interact with a text based user interface via the command-line.
-1. Display the items that can be sorted by month, amount or title.
-1.1. Display only expenses or only incomes.
-2. The application allow user to enter expense(s) and income(s) to the application.
-2.1. While adding assign a month, title and amount to every expense or income. 
-3. User can also edit and remove items from the application. 
-4. They can also quit and save the current task list to file.
+#MoneyTracking
+====================
+
+##Objective
+Building a text based user interface money tracking application. 
+
+##Concepts
+Include features for items(expense & Income):
++ Display the items
++ Add the items
++ Edit or remove items
++ Save and quit
+
+##File Structure
++ *Main.java*
+>Contains the main function to kick the program. 
+>Call the `MainConsole` function. 
+
++ *MainConsole.java*
+>Contains the `display()` function.
+>It display the features of the application.
+>Takes user i/p and runs the `switch` case.
+>Based on the `switch` case,`MoneyTracking` functions are called.
+
++ *MoneyTracking.java*
+>Implements the 4 features of the application.
+
++ *FileHandler.java*
+>Handle file related methods.
+
+
+
+
+
