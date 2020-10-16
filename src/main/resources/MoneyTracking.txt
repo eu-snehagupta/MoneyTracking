@@ -1,0 +1,4 @@
+Expense**food**2020-10-09**23.98
+Income**salary**2020-10-10**568.0
+Expense**rent**2020-10-08**89.03
+Income**youtube earnings**2020-10-11**234.09
