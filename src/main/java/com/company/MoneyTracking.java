@@ -12,40 +12,15 @@
 
 package com.company;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MoneyTracking {
 
-    private String type;
-    private String title;
-    private LocalDate dateFormat;
-    //private String dateFormat;
-    private double amount;
-
-    public static ArrayList<MoneyTracking> moneyList = new ArrayList<>();
-
-    public MoneyTracking(String type, String title, String date, double amount) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        this.type = type;
-        this.title = title;
-        this.dateFormat = LocalDate.parse(date, formatter);  //exceptional handling is required for this in futher steps.
-        //this.dateFormat = date;
-        this.amount = amount;
-
-    }
+    public static ArrayList<Items> moneyList;
 
     public MoneyTracking() {
-    }
-
-    @Override
-    public String toString() {
-
-        return "" + type + "**" + title + "**" + dateFormat + "**" + amount;
-
+        moneyList = new ArrayList<>();
     }
 
     public void showItems() {  //shorting is pending
@@ -64,6 +39,8 @@ public class MoneyTracking {
             case 3 -> printEachItem(filterByType("Income"));   // need to handle that case.
             default -> System.out.println("Invalid userChoice!");
         }
+        System.out.println("Enter any key to continue..");
+        scanUserString();
     }
 
     public void addItems() {
@@ -75,6 +52,7 @@ public class MoneyTracking {
 
         int userChoice = scanUserInteger();
 
+        String type = null;
         switch (userChoice) {
             case 1 -> type = "Expense";
             case 2 -> type = "Income";
@@ -82,17 +60,20 @@ public class MoneyTracking {
         }
 
         System.out.println("Enter your Title:");
-        title = scanUserString();
+        String title = scanUserString();
 
         System.out.println("Enter your Date(yyyy-MM-dd):");
         String date = scanUserString();
 
         System.out.println("Enter your Amount:");
-        amount = scanUserDouble();
+        double amount = scanUserDouble();
 
-        MoneyTracking obj = new MoneyTracking(type, title, date, amount);
+        Items obj = new Items(type, title, date, amount);
         moneyList.add(obj);             //holds the values of the item in moneylist, till its saved using savequit feature.
         System.out.println("Item added successfully!");
+
+        System.out.println("Enter any key to continue..");
+        scanUserString();
     }
 
 
@@ -154,16 +135,16 @@ public class MoneyTracking {
         System.out.println("Item removed successfully!");
     }
 
-    public ArrayList<MoneyTracking> filterByType(String filterValue) {
-        ArrayList<MoneyTracking> showData = new ArrayList<>();
+    public ArrayList<Items> filterByType(String filterValue) {
+        ArrayList<Items> showData = new ArrayList<>();
 
         FileHandler fileHandler = new FileHandler();
-        ArrayList<MoneyTracking> readData = fileHandler.readAsData();
+        ArrayList<Items> readData = fileHandler.readAsData();
 
         if (filterValue.equals("All")) {
             return readData;
         } else {
-            for (MoneyTracking objData : readData) {
+            for (Items objData : readData) {
                 if ((objData.type).equals(filterValue)) {
                     showData.add(objData);
                 }
@@ -172,7 +153,7 @@ public class MoneyTracking {
         return showData;
     }
 
-    private void editValue(ArrayList<MoneyTracking> showData, String editType) {
+    private void editValue(ArrayList<Items> showData, String editType) {
 
         System.out.println("Pick an option:");
         for (int i = 1; i <= showData.size(); i++) {
@@ -190,12 +171,12 @@ public class MoneyTracking {
 
         for (int i = 0; i < showData.size(); i++) {
             if (userChoice == i) {
-                showData.set(i, new MoneyTracking(editType, editTitle, editDate, editAmount));
+                showData.set(i, new Items(editType, editTitle, editDate, editAmount));
             }
         }
     }
 
-    private void removeValue(ArrayList<MoneyTracking> showData) {
+    private void removeValue(ArrayList<Items> showData) {
         int userChoice;
         System.out.println("Pick an option:");  //choice from 1,.. option, which list item to remove
         for (int i = 1; i <= showData.size(); i++) {
@@ -244,8 +225,8 @@ public class MoneyTracking {
         return inputDouble;
     }
 
-    private void printEachItem(ArrayList<MoneyTracking> itemList) {
-        for (MoneyTracking item : itemList) {
+    private void printEachItem(ArrayList<Items> itemList) {
+        for (Items item : itemList) {
             System.out.println(item);
         }
     }

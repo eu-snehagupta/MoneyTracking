@@ -14,12 +14,12 @@ import java.util.ArrayList;
 public class FileHandler {
     private final String fileName = "src/main/resources/MoneyTracking.txt";   //file should be just in one text.
 
-    public void writeAsData(ArrayList<MoneyTracking> list) {
+    public void writeAsData(ArrayList<Items> list) {
         try {
             FileWriter fileWriter = new FileWriter(fileName, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            for (MoneyTracking data : list) {
+            for (Items data : list) {
                 bufferedWriter.write(data.toString() + "\n");
             }
             bufferedWriter.close();
@@ -28,9 +28,9 @@ public class FileHandler {
         }
     }
 
-    public ArrayList<MoneyTracking> readAsData() {
+    public ArrayList<Items> readAsData() {
 
-        ArrayList<MoneyTracking> list = new ArrayList<>();
+        ArrayList<Items> list = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -40,7 +40,7 @@ public class FileHandler {
 
             while ((line = bufferedReader.readLine()) != null) {
                 data = line.split("\\*\\*");  // using '**' as string to distinguish between the values
-                MoneyTracking dataValue = new MoneyTracking(data[0], data[1], data[2], Double.parseDouble(data[3]));
+                Items dataValue = new Items(data[0], data[1], data[2], Double.parseDouble(data[3]));
                 list.add(dataValue);
             }
             bufferedReader.close();
