@@ -14,6 +14,33 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+//import java.time.LocalDate;
+//import java.time.format.DateTimeFormatter;
+
+class Items {
+    String type;
+    private String title;
+    //public LocalDate dateFormat;
+    private String month;
+    private double amount;
+
+    public Items(String type, String title, String month, double amount) {
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        this.type = type;
+        this.title = title;
+        //this.dateFormat = LocalDate.parse(date, formatter);  //exceptional handling is required for this in futher steps.
+        this.month = month;
+        this.amount = amount;
+
+    }
+    @Override
+    public String toString() {
+
+        return "" + type + "**" + title + "**" + month + "**" + amount;
+
+    }
+}
 
 public class MoneyTracking {
 
@@ -62,13 +89,13 @@ public class MoneyTracking {
         System.out.println("Enter your Title:");
         String title = scanUserString();
 
-        System.out.println("Enter your Date(yyyy-MM-dd):");
-        String date = scanUserString();
+        System.out.println("Enter your month:");
+        String month = scanUserMonth();
 
         System.out.println("Enter your Amount:");
         double amount = scanUserDouble();
 
-        Items obj = new Items(type, title, date, amount);
+        Items obj = new Items(type, title, month, amount);
         moneyList.add(obj);             //holds the values of the item in moneylist, till its saved using savequit feature.
         System.out.println("Item added successfully!");
 
@@ -213,6 +240,25 @@ public class MoneyTracking {
         }
         return inputString;
     }
+
+    private String scanUserMonth(){
+        String month =scanUserString().toLowerCase();
+        String[] validMonths = {"january", "february", "march", "april", "may", "june",
+                "july", "august", "september", "october", "november", "december"};
+        boolean isValid = false;
+        for (String validMonth : validMonths) {
+            if (month.equals(validMonth)) {
+                isValid = true;
+                break;
+            }
+        }
+        if (!isValid){
+            System.out.println("Invalid month. Re-enter the month:");
+            scanUserMonth();
+        }
+        return month;
+    }
+
 
     private double scanUserDouble() {
         Scanner sc = new Scanner(System.in);
