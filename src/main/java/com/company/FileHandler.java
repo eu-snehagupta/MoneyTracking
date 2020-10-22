@@ -16,7 +16,7 @@ public class FileHandler {
 
     public void writeAsData(ArrayList<Items> list) {
         try {
-            FileWriter fileWriter = new FileWriter(fileName, true);
+            FileWriter fileWriter = new FileWriter(fileName, false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
             for (Items data : list) {
