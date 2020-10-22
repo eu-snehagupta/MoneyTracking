@@ -1,20 +1,23 @@
 
 package com.company;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 
 public class MoneyTrackingTests {
     @Test
     void createMoneylist() {
         ArrayList<Items> moneyList = new ArrayList<>();
-        moneyList.add(new Items("Expense","food","october",12.50));
-        moneyList.add(new Items("Income","salary","may",575.32));
+        moneyList.add(new Items("Expense", "food", "october", 12.50));
+        moneyList.add(new Items("Income", "salary", "may", 575.32));
         assertTrue(true);
     }
-     /*@Test
-    void TestAddItems() {       //dont know how to test void method without using mock
+     /*@Test          //dont know how to test void method without using mock
+    void TestAddItems() {
         MoneyTracking obj = new MoneyTracking();
         obj.addItems();
         ArrayList<Items> moneyList = new ArrayList<>();
@@ -22,9 +25,7 @@ public class MoneyTrackingTests {
         moneyList.add(new Items("Income","salary","may",575.32));
         assertEquals(2, moneyList.size());
     }
-
    @Test       //tried implementing reflection but the test still failing!:(
-
     public void shouldTakeUserInput() throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         Class c = Class.forName("com.company.MoneyTracking");
         Test t = (Test)c.newInstance();

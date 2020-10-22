@@ -10,7 +10,11 @@ package com.company;
 import java.util.Scanner;
 
 public class MainConsole {
-
+    /**
+     * The display method displays the money tracking features
+     * and ask user to insert the choice of feature.
+     * Based on the choice, methods of money tracking is called.
+     */
     public void display() {
         int userChoice;
 
@@ -33,8 +37,15 @@ public class MainConsole {
         }
     }
 
+    /**
+     * The select method takes the user  input and
+     * selects the methods of the money tracking.
+     * Switch case is used, The display method is called after every method
+     * until save and quit is selected by the user.
+     *
+     * @param userChoice
+     */
     public void select(int userChoice) {  //selects the feature based on user inputs.
-
         MoneyTracking obj = new MoneyTracking();
 
         switch (userChoice) {

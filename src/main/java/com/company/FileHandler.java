@@ -14,6 +14,14 @@ import java.util.ArrayList;
 public class FileHandler {
     private final String fileName = "src/main/resources/MoneyTracking.txt";   //file should be just in one text.
 
+    /**
+     * writeAsData method write the list to the file.
+     * The file path is final and set under fileName.
+     * writeAsData over-write on this file using bufferedWriter and
+     * it throws IOException in case of exception.
+     *
+     * @param list
+     */
     public void writeAsData(ArrayList<Items> list) {
         try {
             FileWriter fileWriter = new FileWriter(fileName, false);
@@ -28,6 +36,15 @@ public class FileHandler {
         }
     }
 
+    /**
+     * readAsData method read the list from the file.
+     * The file path is final and set under fileName.
+     * readAsData frnm this file using bufferedReader and
+     * and return the list of items.
+     * it throws IOException in case of exception.
+     *
+     * @return ArrayList<Items>
+     */
     public ArrayList<Items> readAsData() {
 
         ArrayList<Items> list = new ArrayList<>();
