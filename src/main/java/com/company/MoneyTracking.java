@@ -82,7 +82,7 @@ public class MoneyTracking {
 
         switch (userChoice) {
             case 1 -> show();   //displays each items of the list.
-            case 2 -> sort();  //sort items of the list.
+            case 2 -> sortOrder();  //sort items of the list.
             default -> System.out.println("Invalid userChoice!");
         }
 
@@ -105,7 +105,26 @@ public class MoneyTracking {
             default -> System.out.println("Invalid userChoice!");
         }
     }
-    private void sort() {
+    private void sortOrder(){
+        System.out.println("Pick a sorting order:");
+        System.out.println("(1) Ascending");
+        System.out.println("(2) Descending");
+        System.out.println("->");
+
+        int userChoice = scanUserInteger();
+        String order = "";
+
+        switch (userChoice) {
+            case 1 -> {order= "Ascending";
+                sort(order);
+            }
+            case 2 -> {order= "Descending";
+            sort(order);
+        }
+            default -> System.out.println("Invalid userChoice!");
+        }
+    }
+    private void sort(String order) {
         System.out.println("Pick an option:");
         System.out.println("(1) Sort by title");
         System.out.println("(2) Sort by month");
@@ -115,43 +134,49 @@ public class MoneyTracking {
         int userChoice = scanUserInteger();
 
         switch (userChoice) {
-            case 1 -> printEachItem(sortByTitle());
-            case 2 -> printEachItem(sortByMonth());
-            case 3 -> printEachItem(sortByAmount());
+            case 1 -> printEachItem(sortByTitle(order));
+            case 2 -> printEachItem(sortByMonth(order));
+            case 3 -> printEachItem(sortByAmount(order));
             default -> System.out.println("Invalid userChoice!");
         }
     }
-    private ArrayList<Items> sortByTitle() {
-
+    private ArrayList<Items> sortByTitle(String order) {
         //ArrayList<Items> readData = moneyList;
-
         Comparator<Items> compareByTitle = Comparator.comparing(Items::getTitle);
-        Collections.sort(moneyList, compareByTitle);
+        Comparator<Items> ReverseCompareByTitle = compareByTitle.reversed();
 
+        if(order.equals("Ascending")){
+            Collections.sort(moneyList, compareByTitle);
+        } else {
+            Collections.sort(moneyList, ReverseCompareByTitle);
+        }
         return moneyList;
     }
-    private ArrayList<Items> sortByMonth() {
-
+    private ArrayList<Items> sortByMonth(String order) {
         //ArrayList<Items> readData = moneyList;
-
         List<String> validMonths = Arrays.asList("january", "february", "march", "april", "may", "june",
                 "july", "august", "september", "october", "november", "december");
 
         Comparator<Items> compareByMonth = Comparator.comparing(item -> Integer.valueOf(validMonths.indexOf(item.getMonth())));
-        Collections.sort(moneyList, compareByMonth);
+        Comparator<Items> ReverseCompareByMonth = compareByMonth.reversed();
 
-        //Comparator<Items> compareByMonth = Comparator.comparing(Items::getMonth);
-        //Collections.sort(readData, compareByMonth);
-
+        if(order.equals("Ascending")){
+            Collections.sort(moneyList, compareByMonth);
+        } else {
+            Collections.sort(moneyList, ReverseCompareByMonth);
+        }
         return moneyList;
     }
-    private ArrayList<Items> sortByAmount() {
-
+    private ArrayList<Items> sortByAmount(String order) {
         //ArrayList<Items> readData = moneyList;
-
         Comparator<Items> compareByAmount = Comparator.comparingDouble(Items::getAmount);
-        Collections.sort(moneyList, compareByAmount);
+        Comparator<Items> ReverseCompareByAmount = compareByAmount.reversed();
 
+        if(order.equals("Ascending")){
+            Collections.sort(moneyList, compareByAmount);
+        } else {
+            Collections.sort(moneyList, ReverseCompareByAmount);
+        }
         return moneyList;
     }
 
@@ -208,12 +233,7 @@ public class MoneyTracking {
     private void edit() {
         //ArrayList<Items> readData = moneyList;
 
-        System.out.println("Pick an option:");
-        for (int i = 0; i < moneyList.size(); i++) {
-            System.out.println(i + ": " + moneyList.get(i));  //choice from 1,.. option, which list item to edit
-        }
-
-        int userChoice = scanUserInteger();
+        int userChoice = pickAnOptionToEdit();
 
         System.out.println("Enter new type:");  //ask user to re-enter the values for title, date, amount
         String editType = scanUserType();        //should it be an optional feature??
@@ -233,13 +253,7 @@ public class MoneyTracking {
     }
     private void remove() {
         //ArrayList<Items> readData = moneyList;
-
-        System.out.println("Pick an option:");  //choice from 1,.. option, which list item to remove
-        for (int i = 0; i < moneyList.size(); i++) {
-            System.out.println(i + ": " + moneyList.get(i));
-        }
-
-        int userChoice = scanUserInteger();
+        int userChoice = pickAnOptionToEdit();
 
         for (int i = 0; i < moneyList.size(); i++) {
             if (userChoice == i) {
@@ -247,6 +261,18 @@ public class MoneyTracking {
             }
         }
         System.out.println("Item removed successfully!");
+    }
+    private int pickAnOptionToEdit(){
+        System.out.println("Pick an option:");
+        for (int i = 0; i < moneyList.size(); i++) {
+            System.out.println(i + ": " + moneyList.get(i));  //choice from 1,.. option, which list item to edit
+        }
+        int userChoice = scanUserInteger();
+        if(userChoice < 0 || userChoice >= moneyList.size() ){
+            System.out.println("Invalid option. Repick!");
+            pickAnOptionToEdit();
+        }
+        return userChoice;
     }
 
 //*********************//
@@ -326,7 +352,7 @@ public class MoneyTracking {
         }
         if (!isValid) {
             System.out.println("Invalid type. Re-enter the type:");
-            scanUserMonth();
+            scanUserType();
         }
         return type;
     }
@@ -346,7 +372,7 @@ public class MoneyTracking {
             System.out.println(item);
         }
         if (itemList.size() == 0) {
-            System.out.println("No items added.");
+            System.out.println("No items available.");
         }
     }
 
