@@ -16,7 +16,7 @@ public class MoneyTrackingTests {
         moneyList.add(new Items("Income", "salary", "may", 575.32));
         assertTrue(true);
     }
-     /*@Test          //dont know how to test void method without using mock
+     /*@Test          //dont know how to test void method without using mockito
     void TestAddItems() {
         MoneyTracking obj = new MoneyTracking();
         obj.addItems();
@@ -25,7 +25,7 @@ public class MoneyTrackingTests {
         moneyList.add(new Items("Income","salary","may",575.32));
         assertEquals(2, moneyList.size());
     }
-   @Test       //tried implementing reflection but the test still failing!:(
+   @Test       //tried implementing reflection to test private methods, but the test still failing!:(
     public void shouldTakeUserInput() throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         Class c = Class.forName("com.company.MoneyTracking");
         Test t = (Test)c.newInstance();
