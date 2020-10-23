@@ -17,7 +17,7 @@ Include features for items(expense & Income):
 3. JUnit setup
 
 ```bash
-git clone https://github.com/<<your_username>>/MoneyTracking.git
+git clone https://github.com/your_username_/MoneyTracking.git
 ```
 
 ```bash
