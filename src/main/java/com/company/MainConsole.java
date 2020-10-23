@@ -45,7 +45,7 @@ public class MainConsole {
      *
      * @param userChoice
      */
-    public void select(int userChoice) {  //selects the feature based on user inputs.
+    private void select(int userChoice) {  //selects the feature based on user inputs.
         MoneyTracking obj = new MoneyTracking();
 
         switch (userChoice) {
