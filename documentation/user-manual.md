@@ -23,8 +23,8 @@ Money Tracking is an application which allows a user to keep track of their's ex
 >Load and save items list to a file.
 
 ## Steps
-![Flow chart diagram](documentation/flowChart.png)
-![Class diagram](documentation/classDiagram.png)
+![Flow chart diagram](./flowChart.png)
+![Class diagram](./classDiagram.png)
 
 ## File Structure
 + *Main.java*
